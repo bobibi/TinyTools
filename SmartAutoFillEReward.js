@@ -21,7 +21,7 @@
  **/
 
 (function(){
-	console.clear();
+	//console.clear();
 	//console.info("SmartEReward Start");
 	
 	var inputList = document.getElementsByTagName("input");
@@ -41,13 +41,12 @@
 	for(i=0;i<radioNameList.length;i++){
 		//console.info(radioNameList[i])
 		radioList = document.getElementsByName(radioNameList[i]);
-		
 		myselect = Math.round(Math.random()*1000) % radioList.length;
 		radioList[myselect].setAttribute("checked", "checked");
 		radioList[myselect].click();
 	}
 	
-	// process form in iframe:
+	// process form in iframes:
 	var iframeList = document.getElementsByTagName("iframe");
 	for(jj=0;jj<iframeList.length;jj++){
 		inputList = iframeList[jj].contentDocument.getElementsByTagName("input");
@@ -65,7 +64,6 @@
 		for(i=0;i<radioNameList.length;i++){
 			//console.info(radioNameList[i])
 			radioList = iframeList[jj].contentDocument.getElementsByName(radioNameList[i]);
-			
 			myselect = Math.round(Math.random()*1000) % radioList.length;
 			radioList[myselect].setAttribute("checked", "checked");
 			radioList[myselect].click();
