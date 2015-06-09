@@ -46,24 +46,25 @@ rows = [i for i in reader]
 for i in range(1,len(rows)-1):
     for j in range(i+1, len(rows)):
         simi = similarity(rows[i], rows[j])
+        print '(%d, %d): %d'%(i,j,simi)
         failed = True
         try:
             s.query(AppCompare).filter(AppCompare.md5A==rows[i][0] and AppCompare.md5B==rows[j][0]).update({
                 "NumOfBothDetected": simi})
             s.commit()
-            print 'OK: (%d, %d)'%(i,j)
+            print 'OK'
             failed = False
-        except:
+        except exc.NoResultFound:
             s.rollback()
         if failed:
             try:
                 s.query(AppCompare).filter(AppCompare.md5A==rows[j][0] and AppCompare.md5B==rows[i][0]).update({
                     "NumOfBothDetected": simi})
                 s.commit()
-                print 'OK: (%d, %d)'%(i,j)
+                print 'OK'
                 failed = False
-            except:
+            except exc.NoResultFound:
                 s.rollback()
         if failed:
-            print 'FAILED: (%d, %d)'%(i,j)
+            print 'FAILED'
 
