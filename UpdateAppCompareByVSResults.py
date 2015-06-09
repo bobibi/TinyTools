@@ -49,7 +49,7 @@ for i in range(1,len(rows)-1):
         print '(%d, %d): %d'%(i,j,simi)
         failed = True
         try:
-            s.query(AppCompare).filter(AppCompare.md5A==rows[i][0] and AppCompare.md5B==rows[j][0]).update({
+            s.query(AppCompare).filter(and_(AppCompare.md5A==rows[i][0], AppCompare.md5B==rows[j][0])).update({
                 "NumOfBothDetected": simi})
             s.commit()
             print 'OK'
@@ -58,7 +58,7 @@ for i in range(1,len(rows)-1):
             s.rollback()
         if failed:
             try:
-                s.query(AppCompare).filter(AppCompare.md5A==rows[j][0] and AppCompare.md5B==rows[i][0]).update({
+                s.query(AppCompare).filter(and_(AppCompare.md5A==rows[j][0], AppCompare.md5B==rows[i][0])).update({
                     "NumOfBothDetected": simi})
                 s.commit()
                 print 'OK'
