@@ -18,3 +18,15 @@ class AmazonReview(Base):
     
 class AmazonReviewer(Base):
     __table__=Table('AmazonReviewer', metadata, autoload=True)
+    
+uid_full_list = s.query(AmazonReview.CustomerId).all()
+n = 0
+for uid in uid_full_list:
+    if uid.CustomerId:
+        try:
+            reviewer = s.query(AmazonReviewer).filter(AmazonReviewer.UID == uid.CustomerId).one()
+        except exc.NoResultFound:
+            n += 1
+            print uid.CustomerId
+    if n>=10000:
+        break
