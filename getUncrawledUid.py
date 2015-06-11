@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, exc
 from sqlalchemy import and_
 
-engine = create_engine("mysql://VisualThreats:@localhost/VisualThreats?charset=utf8&use_unicode=1", echo=False)
+engine = create_engine("mysql://ReviewSec:@localhost/ReviewSec?charset=utf8&use_unicode=1", echo=False)
 Base = declarative_base()
 metadata = MetaData(bind=engine)
 session = sessionmaker()
@@ -19,14 +19,14 @@ class AmazonReview(Base):
 class AmazonReviewer(Base):
     __table__=Table('AmazonReviewer', metadata, autoload=True)
     
-uid_full_list = s.query(AmazonReview.CustomerId).all()
+uid_full_list = s.query(AmazonReview.CustomerID).all()
 n = 0
 for uid in uid_full_list:
-    if uid.CustomerId:
+    if uid.CustomerID:
         try:
-            reviewer = s.query(AmazonReviewer).filter(AmazonReviewer.UID == uid.CustomerId).one()
+            reviewer = s.query(AmazonReviewer).filter(AmazonReviewer.UID == uid.CustomerID).one()
         except exc.NoResultFound:
             n += 1
-            print uid.CustomerId
-    if n>=10000:
+            print uid.CustomerID
+    if n>=20000:
         break
