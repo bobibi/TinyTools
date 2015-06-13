@@ -20,7 +20,7 @@ class AmazonReview(Base):
 class AmazonReviewer(Base):
     __table__=Table('AmazonReviewer', metadata, autoload=True)
     
-uid_full_list = s.query(distinct(AmazonReview.CustomerID)).all()
+uid_full_list = s.query(AmazonReview.CustomerID).all()
 n = 0
 for uid in uid_full_list:
     if uid.CustomerID:
