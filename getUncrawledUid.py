@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, exc
 from sqlalchemy import and_
+from sqlalchemy import distinct
 
 engine = create_engine("mysql://ReviewSec:@localhost/ReviewSec?charset=utf8&use_unicode=1", echo=False)
 Base = declarative_base()
@@ -19,7 +20,7 @@ class AmazonReview(Base):
 class AmazonReviewer(Base):
     __table__=Table('AmazonReviewer', metadata, autoload=True)
     
-uid_full_list = s.query(AmazonReview.CustomerID).all()
+uid_full_list = s.query(distinct(AmazonReview.CustomerID)).all()
 n = 0
 for uid in uid_full_list:
     if uid.CustomerID:
