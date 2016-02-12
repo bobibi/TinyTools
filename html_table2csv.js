@@ -6,7 +6,7 @@ $('table').dblclick(function(event){
   var str = '';
   $(event.target).parents('table').find('tr').each(function(i, r){
     var d = '';
-    $(r).find('td').each(function(j, c){
+    $(r).find('td,th').each(function(j, c){
       str += d+$(c).text();
       d = ','
     })
