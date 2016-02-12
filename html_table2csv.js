@@ -8,7 +8,7 @@ $('table').dblclick(function(event){
   while(x) {
     console.info(x)
     if(x.prev(':header')) {
-      console.info('TITLE')
+      console.info(x.prev(':header').text());
       title = x.prev(':header').text();
       break;
     }
