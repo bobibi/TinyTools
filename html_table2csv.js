@@ -5,10 +5,8 @@ $('table').dblclick(function(event){
   if (confirm("Download this table as CSV?") != true) return;
   var title = '';
   var x = $(event.target).closest('table');
-  while(x) {
-    console.info(x)
-    if(x.prev(':header')) {
-      console.info(x.prev(':header').text());
+  while(x.length>0) {
+    if(x.prev(':header').length>0) {
       title = x.prev(':header').text();
       break;
     }
